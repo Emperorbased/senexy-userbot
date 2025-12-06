@@ -1,13 +1,12 @@
 # 🐧 Senexy Userbot
 
-Powerful Telegram Userbot
+Powerful Telegram Userbot with Multi-Prefix Support
 
-## Install
+## 🚀 Quick Install
+
+### Termux
 ```bash
 git clone https://github.com/Emperorbased/senexy-userbot
 cd senexy-userbot
-pip install -r requirements.txt
-python install.py
-```
-
-Made by Emperorbased
+pip install pyrogram tgcrypto flask
+python senexy.py

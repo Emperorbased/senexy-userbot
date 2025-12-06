@@ -1,1 +1,107 @@
-Senexy*{margin:0;padding:0;box-sizing:border-box}body{font-family:"Space Grotesk",sans-serif;background:#0a0e27;color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}.container{background:rgba(15,23,42,.85);backdrop-filter:blur(40px);border:1px solid rgba(148,163,184,.1);border-radius:32px;padding:56px;max-width:520px;width:100%;box-shadow:0 25px 50px -12px rgba(0,0,0,.6)}.logo{font-size:88px;text-align:center;margin-bottom:20px}h1{font-size:56px;font-weight:700;text-align:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:40px}.status{background:linear-gradient(135deg,rgba(16,185,129,.15) 0%,rgba(5,150,105,.15) 100%);border:1px solid rgba(16,185,129,.4);border-radius:16px;padding:18px;margin-bottom:40px;text-align:center;color:#10b981;font-size:20px;font-weight:600}.steps{display:flex;gap:10px;margin-bottom:40px}.dot{flex:1;height:5px;background:rgba(148,163,184,.15);border-radius:3px}.dot.active{background:linear-gradient(90deg,#667eea,#764ba2)}.form-step{display:none}.form-step.active{display:block}label{display:block;margin-bottom:14px;color:#e2e8f0;font-weight:600}input{width:100%;padding:16px 20px;background:rgba(30,41,59,.6);border:2px solid rgba(148,163,184,.15);border-radius:14px;font-size:16px;color:#f1f5f9}input:focus{outline:0;border-color:#667eea}.buttons{display:flex;gap:14px;margin-top:32px}button{flex:1;padding:16px 28px;border:0;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer}.btn-primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}.btn-secondary{background:rgba(148,163,184,.15);color:#e2e8f0}🐧SENEXY✓ Senexy is installedAPI IDContinueAPI HashBackContinuePhoneBackContinuePassword (Optional)BackContinueCodeBackDoneconst sid=new URLSearchParams(window.location.search).get("session");let step=1;function next(s){const inp=["api_id","api_hash","phone","password"][s-1];const val=document.getElementById(inp).value;if(s!==4&&!val)return;fetch("/api/step"+s,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({session_id:sid,[inp]:val})});document.getElementById("s"+s).classList.remove("active");step=s+1;document.getElementById("s"+step).classList.add("active");for(let i=1;i<=5;i++)document.getElementById("d"+i).className=i<=step?"dot active":"dot"}function prev(s){document.getElementById("s"+s).classList.remove("active");step=s-1;document.getElementById("s"+step).classList.add("active");for(let i=1;i<=5;i++)document.getElementById("d"+i).className=i<=step?"dot active":"dot"}function done(){fetch("/api/complete",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({session_id:sid,code:document.getElementById("code").value})}).then(()=>alert("Done!"))}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senexy Setup</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Space Grotesk",sans-serif;background:#0a0e27;color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
+.container{background:rgba(15,23,42,.85);backdrop-filter:blur(40px);border:1px solid rgba(148,163,184,.1);border-radius:32px;padding:56px;max-width:520px;width:100%;box-shadow:0 25px 50px -12px rgba(0,0,0,.6)}
+.logo{font-size:88px;text-align:center;margin-bottom:20px}
+h1{font-size:56px;font-weight:700;text-align:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:40px}
+.status{background:linear-gradient(135deg,rgba(16,185,129,.15) 0%,rgba(5,150,105,.15) 100%);border:1px solid rgba(16,185,129,.4);border-radius:16px;padding:18px;margin-bottom:40px;text-align:center;color:#10b981;font-size:20px;font-weight:600}
+.steps{display:flex;gap:10px;margin-bottom:40px}
+.dot{flex:1;height:5px;background:rgba(148,163,184,.15);border-radius:3px}
+.dot.active{background:linear-gradient(90deg,#667eea,#764ba2)}
+.form-step{display:none}
+.form-step.active{display:block}
+label{display:block;margin-bottom:14px;color:#e2e8f0;font-weight:600}
+input{width:100%;padding:16px 20px;background:rgba(30,41,59,.6);border:2px solid rgba(148,163,184,.15);border-radius:14px;font-size:16px;color:#f1f5f9}
+input:focus{outline:0;border-color:#667eea}
+.buttons{display:flex;gap:14px;margin-top:32px}
+button{flex:1;padding:16px 28px;border:0;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer}
+.btn-primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff}
+.btn-secondary{background:rgba(148,163,184,.15);color:#e2e8f0}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="logo">🐧</div>
+<h1>SENEXY</h1>
+<div class="status">✓ Senexy is installed</div>
+<div class="steps">
+<div class="dot active" id="d1"></div>
+<div class="dot" id="d2"></div>
+<div class="dot" id="d3"></div>
+<div class="dot" id="d4"></div>
+<div class="dot" id="d5"></div>
+</div>
+<form>
+<div class="form-step active" id="s1">
+<label>API ID</label>
+<input type="text" id="api_id" placeholder="12345678">
+<div class="buttons">
+<button type="button" class="btn-primary" onclick="next(1)">Continue</button>
+</div>
+</div>
+<div class="form-step" id="s2">
+<label>API Hash</label>
+<input type="text" id="api_hash" placeholder="abcdef">
+<div class="buttons">
+<button type="button" class="btn-secondary" onclick="prev(2)">Back</button>
+<button type="button" class="btn-primary" onclick="next(2)">Continue</button>
+</div>
+</div>
+<div class="form-step" id="s3">
+<label>Phone</label>
+<input type="tel" id="phone" placeholder="+123">
+<div class="buttons">
+<button type="button" class="btn-secondary" onclick="prev(3)">Back</button>
+<button type="button" class="btn-primary" onclick="next(3)">Continue</button>
+</div>
+</div>
+<div class="form-step" id="s4">
+<label>Password (Optional)</label>
+<input type="password" id="password">
+<div class="buttons">
+<button type="button" class="btn-secondary" onclick="prev(4)">Back</button>
+<button type="button" class="btn-primary" onclick="next(4)">Continue</button>
+</div>
+</div>
+<div class="form-step" id="s5">
+<label>Code</label>
+<input type="text" id="code" placeholder="12345">
+<div class="buttons">
+<button type="button" class="btn-secondary" onclick="prev(5)">Back</button>
+<button type="button" class="btn-primary" onclick="done()">Done</button>
+</div>
+</div>
+</form>
+</div>
+<script>
+const sid=new URLSearchParams(window.location.search).get("session");
+let step=1;
+function next(s){
+const inp=["api_id","api_hash","phone","password"][s-1];
+const val=document.getElementById(inp).value;
+if(s!==4&&!val)return;
+fetch("/api/step"+s,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({session_id:sid,[inp]:val})});
+document.getElementById("s"+s).classList.remove("active");
+step=s+1;
+document.getElementById("s"+step).classList.add("active");
+for(let i=1;i<=5;i++)document.getElementById("d"+i).className=i<=step?"dot active":"dot";
+}
+function prev(s){
+document.getElementById("s"+s).classList.remove("active");
+step=s-1;
+document.getElementById("s"+step).classList.add("active");
+for(let i=1;i<=5;i++)document.getElementById("d"+i).className=i<=step?"dot active":"dot";
+}
+function done(){
+fetch("/api/complete",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({session_id:sid,code:document.getElementById("code").value})}).then(()=>alert("Done!"));
+}
+</script>
+</body>
+</html>
