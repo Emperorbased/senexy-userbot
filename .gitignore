@@ -1,0 +1,9 @@
+*.session
+*.session-journal
+credentials.json
+configs/
+__pycache__/
+*.pyc
+.env
+venv/
+.setup_complete
